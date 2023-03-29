@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:safe_connect/screens/web_view_screen.dart';
 
 class DiseasesOptionsScreen extends StatelessWidget {
   static const routeName = 'diseases-options-screen';
@@ -7,13 +8,13 @@ class DiseasesOptionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String,dynamic> data=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
-    List<dynamic> diseases=data['disease'];
-    // List<dynamic> diseases = [
-    //   {"name": "Gonorrhea", "percent": 62.34},
-    //   {"name": "AIDS", "percent": 13.34},
-    //   {"name": "Syphllis", "percent": 10.62}
-    // ];
+    // Map<String,dynamic> data=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
+    // List<dynamic> diseases=data['disease'];
+    List<dynamic> diseases = [
+      {"name": "Gonorrhea", "percent": 62.34},
+      {"name": "AIDS", "percent": 13.34},
+      {"name": "Syphllis", "percent": 10.62}
+    ];
     print(diseases);
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +57,9 @@ class DiseasesOptionsScreen extends StatelessWidget {
                     Row(
                       children: [
                         ContainerButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewScreen(),));
+                          },
                           text: "Know More",
                           backgroundColor: Colors.grey,
                           borderRadius: BorderRadius.only(

@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context)=>Symptoms()),
       ],
       child: MaterialApp(
-        home: QuestionsScreen(),
+        home: DiseasesOptionsScreen(),
         routes: {
           QuestionsScreen.routeName:(context)=>QuestionsScreen(),
           DiseasesOptionsScreen.routeName:(context)=>DiseasesOptionsScreen(),

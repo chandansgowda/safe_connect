@@ -43,6 +43,7 @@ dependencies:
   chatview: ^1.2.1
   firebase_storage: ^11.0.3
   percent_indicator: ^4.2.3
+  webview_flutter: ^4.0.7
 
 dev_dependencies:
   flutter_test:
