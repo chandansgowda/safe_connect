@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:safe_connect/screens/groups_screen.dart';
 import 'package:safe_connect/screens/web_view_screen.dart';
 
 class DiseasesOptionsScreen extends StatelessWidget {
@@ -8,14 +9,13 @@ class DiseasesOptionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Map<String,dynamic> data=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
-    // List<dynamic> diseases=data['disease'];
-    List<dynamic> diseases = [
-      {"name": "Gonorrhea", "percent": 62.34},
-      {"name": "AIDS", "percent": 13.34},
-      {"name": "Syphllis", "percent": 10.62}
-    ];
-    print(diseases);
+    Map<String,dynamic> data=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
+    List<dynamic> diseases=data['disease'];
+    // List<dynamic> diseases = [
+    //   {"name": "Gonorrhea", "percent": 62.34},
+    //   {"name": "AIDS", "percent": 13.34},
+    //   {"name": "Syphllis", "percent": 10.62}
+    // ];
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sam"),
@@ -66,7 +66,9 @@ class DiseasesOptionsScreen extends StatelessWidget {
                               bottomLeft: Radius.circular(10)),
                         ),
                         ContainerButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>GroupsScreen(diseaseName: disease['name'])));
+                          },
                           text: "Join community",
                           backgroundColor: Colors.green,
                           borderRadius: BorderRadius.only(

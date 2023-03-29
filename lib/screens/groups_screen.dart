@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:safe_connect/screens/chat_screen.dart';
 
 class GroupsScreen extends StatelessWidget {
+  final String diseaseName;
   final db = FirebaseFirestore.instance;
+
+  GroupsScreen({super.key, required this.diseaseName});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class GroupsScreen extends StatelessWidget {
       ),
       body: FutureBuilder<QuerySnapshot>(
         future:
-            db.collection('diseases').doc('AIDS').collection('groups').get(),
+            db.collection('diseases').doc(diseaseName).collection('groups').get(),
         builder: (ctx, snapshot) {
           final List groups = snapshot.data!.docs;
           if (!snapshot.hasData) {

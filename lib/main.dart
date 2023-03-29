@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:safe_connect/firebase_options.dart';
 import 'package:safe_connect/models/questions.dart';
 import 'package:safe_connect/screens/diseases_options_screen.dart';
 import 'package:safe_connect/screens/questions_screen.dart';
 
-void main(){
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -18,7 +24,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context)=>Symptoms()),
       ],
       child: MaterialApp(
-        home: DiseasesOptionsScreen(),
+        home: QuestionsScreen(),
         routes: {
           QuestionsScreen.routeName:(context)=>QuestionsScreen(),
           DiseasesOptionsScreen.routeName:(context)=>DiseasesOptionsScreen(),
