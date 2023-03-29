@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:safe_connect/models/questions.dart';
 import 'package:safe_connect/screens/home_screen.dart';
 
 void main(){
@@ -10,8 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context)=>Symptoms()),
+      ],
+      child: MaterialApp(
+        home: HomeScreen(),
+      ),
     );
   }
 }
