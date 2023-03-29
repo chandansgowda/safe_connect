@@ -3,16 +3,17 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safe_connect/models/questions.dart';
-import 'package:safe_connect/screens/dummy_screen.dart';
+import 'package:safe_connect/screens/diseases_options_screen.dart';
 import 'package:safe_connect/services.dart';
 
-class HomeScreen extends StatefulWidget {
+class QuestionsScreen extends StatefulWidget {
+  static const routeName = '/questions-screen';
   int index = 0;
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     final questionsList = Provider.of<Symptoms>(context).questionsList;
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: QuestionBody(
                 question: questionsList[widget.index],
+                questionNumber: widget.index,
               ),
             ),
             GestureDetector(
@@ -35,31 +37,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (questionsList[widget.index].answer != -1) {
                   if (widget.index == 22) {
                     //TODO:Navigate to next screen
-                    Services().getDiseases(questionsList).then((value) =>
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DummyScreen())));
+                    Services().getDiseases(questionsList).then((response) {
+                      Navigator.pushNamed(context, DiseasesOptionsScreen.routeName,arguments: response);
+                    });
                   } else {
                     setState(() {
                       widget.index = widget.index + 1;
                     });
                   }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.grey.shade200.withOpacity(0.5),
-                    content: BackdropFilter(
-                        filter:ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Center(child: Text("Select the option",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),)))),
-                    duration: const Duration(seconds: 1),
-                    behavior: SnackBarBehavior.floating,
-                    padding: const EdgeInsets.all(10),
-                  ),
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.grey.shade200.withOpacity(0.5),
+                      content: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Center(
+                                  child: Text(
+                                "Select the option",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              )))),
+                      duration: const Duration(seconds: 1),
+                      behavior: SnackBarBehavior.floating,
+                      padding: const EdgeInsets.all(10),
+                    ),
                   );
                 }
               },
@@ -84,7 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class QuestionBody extends StatefulWidget {
   Question question;
-  QuestionBody({required this.question});
+  int questionNumber;
+  QuestionBody({required this.question, required this.questionNumber});
 
   @override
   State<QuestionBody> createState() => _QuestionBodyState();
@@ -104,7 +113,12 @@ class _QuestionBodyState extends State<QuestionBody> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Center(child: Text(widget.question.questionText)),
+        Center(
+            child: Text(
+          "${widget.questionNumber + 1}. " + widget.question.questionText,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 18),
+        )),
         Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

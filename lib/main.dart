@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safe_connect/models/questions.dart';
-import 'package:safe_connect/screens/home_screen.dart';
+import 'package:safe_connect/screens/diseases_options_screen.dart';
+import 'package:safe_connect/screens/questions_screen.dart';
 
 void main(){
   runApp(MyApp());
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context)=>Symptoms()),
       ],
       child: MaterialApp(
-        home: HomeScreen(),
+        home: QuestionsScreen(),
+        routes: {
+          QuestionsScreen.routeName:(context)=>QuestionsScreen(),
+          DiseasesOptionsScreen.routeName:(context)=>DiseasesOptionsScreen(),
+        },
       ),
     );
   }
