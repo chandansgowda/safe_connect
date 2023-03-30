@@ -40,10 +40,11 @@ dependencies:
   provider: ^6.0.5
   http: ^0.13.5
   cloud_firestore: ^4.4.5
-  chatview: ^1.2.1
   firebase_storage: ^11.0.3
   percent_indicator: ^4.2.3
   webview_flutter: ^4.0.7
+  flutterfire_ui: ^0.4.3+20
+  firebase_auth: ^4.4.0
 
 dev_dependencies:
   flutter_test:

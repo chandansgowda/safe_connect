@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safe_connect/firebase_options.dart';
 import 'package:safe_connect/models/questions.dart';
+import 'package:safe_connect/screens/auth_gate.dart';
 import 'package:safe_connect/screens/diseases_options_screen.dart';
 import 'package:safe_connect/screens/questions_screen.dart';
 
@@ -24,7 +25,24 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context)=>Symptoms()),
       ],
       child: MaterialApp(
-        home: QuestionsScreen(),
+        home: AuthGate(),
+        theme: ThemeData.dark().copyWith(
+          inputDecorationTheme: InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.pink),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all<EdgeInsets>(
+                const EdgeInsets.all(16),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            ),
+          ),
+        ),
         routes: {
           QuestionsScreen.routeName:(context)=>QuestionsScreen(),
           DiseasesOptionsScreen.routeName:(context)=>DiseasesOptionsScreen(),

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:safe_connect/screens/chat_screen.dart';
+import 'package:safe_connect/screens/home_screen.dart';
 
 class GroupsScreen extends StatelessWidget {
   final String diseaseName;
@@ -51,7 +51,7 @@ class GroupsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (ctx) => ChatScreen(group['name'], group['dpUrl'])));
+                                  builder: (ctx) => HomeScreen()));
                         },
                         child: Text(
                           "Join Group",
