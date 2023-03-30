@@ -4,7 +4,7 @@ import 'package:safe_connect/screens/groups_screen.dart';
 import 'package:safe_connect/screens/web_view_screen.dart';
 
 class PredictedDiseasesScreen extends StatelessWidget {
-  static const routeName = 'diseases-options-screen';
+  static const routeName = 'predicted-diseases-screen';
   const PredictedDiseasesScreen({Key? key}) : super(key: key);
 
   @override

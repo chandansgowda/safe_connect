@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safe_connect/screens/groups_screen.dart';
 
 class DiseasesOptionsScreen extends StatelessWidget {
+  static const routeName='/diseases-options-screen';
   const DiseasesOptionsScreen({Key? key}) : super(key: key);
 
   @override
