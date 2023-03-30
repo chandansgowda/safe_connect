@@ -5,6 +5,7 @@ import 'package:safe_connect/firebase_options.dart';
 import 'package:safe_connect/models/questions.dart';
 import 'package:safe_connect/screens/auth_gate.dart';
 import 'package:safe_connect/screens/diseases_options_screen.dart';
+import 'package:safe_connect/screens/predicted_diseases_screen.dart';
 import 'package:safe_connect/screens/questions_screen.dart';
 
 void main() async{
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         routes: {
           QuestionsScreen.routeName:(context)=>QuestionsScreen(),
           DiseasesOptionsScreen.routeName:(context)=>DiseasesOptionsScreen(),
+          PredictedDiseasesScreen.routeName:(context)=>PredictedDiseasesScreen()
         },
       ),
     );
