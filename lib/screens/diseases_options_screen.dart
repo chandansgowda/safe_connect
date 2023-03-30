@@ -1,121 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:safe_connect/screens/groups_screen.dart';
-import 'package:safe_connect/screens/web_view_screen.dart';
 
 class DiseasesOptionsScreen extends StatelessWidget {
-  static const routeName = 'diseases-options-screen';
   const DiseasesOptionsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Map<String,dynamic> data=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
-    List<dynamic> diseases=data['disease'];
-    // List<dynamic> diseases = [
-    //   {"name": "Gonorrhea", "percent": 62.34},
-    //   {"name": "AIDS", "percent": 13.34},
-    //   {"name": "Syphllis", "percent": 10.62}
-    // ];
+    List<String> diseases = [
+      'AIDS',
+      'Chlamydia',
+      'Genital Herpes',
+      'Gonorrhea',
+      'HPV',
+      'Hepatitis A',
+      'Hepatitis B',
+      'Hepatitis C',
+      'Hepatitis D',
+      'Syphllis',
+      'Trichomoniasis'
+    ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sam"),
+        title: Text("Title"),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Center(child: Text("Diseases")),
-          Column(
-            children: diseases.map((disease) {
-              return Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Column(
-                  children: [
-                    Padding(
+      body: ListView(
+        children: diseases
+            .map(
+              (disease) => GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>GroupsScreen(diseaseName: disease)));
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Color(0xfff0f0f0), width: 2)),
+                  child: Center(
+                    child: Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            disease['name'],
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          CircularPercentIndicator(
-                            radius: 30,
-                            percent: disease['percent'] / 100,
-                            center: Text(
-                                disease['percent'].toInt().toString() + "%"),
-                          ),
-                        ],
+                      child: Text(
+                        disease,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Color(0xff3b8bf0),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Row(
-                      children: [
-                        ContainerButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewScreen(),));
-                          },
-                          text: "Know More",
-                          backgroundColor: Colors.grey,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10)),
-                        ),
-                        ContainerButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>GroupsScreen(diseaseName: disease['name'])));
-                          },
-                          text: "Join community",
-                          backgroundColor: Colors.green,
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(10)),
-                        ),
-
-                      ],
-                    )
-                  ],
+                  ),
                 ),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ContainerButton extends StatelessWidget {
-  final String text;
-  final BorderRadius borderRadius;
-  final Function() onPressed;
-  final Color backgroundColor;
-
-  const ContainerButton(
-      {super.key,
-      required this.text,
-      required this.borderRadius,
-      required this.onPressed,
-      required this.backgroundColor});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: borderRadius,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Center(child: Text(text,style: TextStyle(fontSize: 16),)),
-          ),
-        ),
+              ),
+            )
+            .toList(),
       ),
     );
   }
