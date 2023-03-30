@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:safe_connect/models/questions.dart';
 
@@ -20,7 +19,7 @@ class Services{
     return json.decode(response.body);
   }
 
-  static Future void addUserDataToFirebase(
+  static Future<void> addUserDataToFirebase(
       {required String d1, required String d2, required String d3, required List<String> joinedGroups}) async{
     await FirebaseFirestore.instance.collection('users').doc('a@a.com').set({
       "isDiseaseKnown":true,
