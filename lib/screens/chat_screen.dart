@@ -36,6 +36,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) =>
       Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xfff53679),
           title: Text(widget.groupName),
         ),
         body: StreamBuilder(
@@ -68,6 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 });
                 print(messageDocs);
                 return Chat(
+                  theme: DefaultChatTheme(primaryColor: Color(0xfff53679)),
                   messages: messages,
                   onAttachmentPressed: _handleImageSelection,
                   onSendPressed: _handleSendPressed,

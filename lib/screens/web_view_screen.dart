@@ -37,8 +37,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
       ..loadRequest(Uri.parse(widget.webLink));
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffea1f62),
-        title: Text("Web view"),
+        backgroundColor: Color(0xfff53679),
+        title: Text("Know more"),
       ),
       body: WebViewWidget(controller: controller),
     );

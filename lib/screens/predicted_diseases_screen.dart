@@ -21,9 +21,9 @@ class PredictedDiseasesScreen extends StatelessWidget {
     //   {"name": "Syphllis", "percent": 10.62}
     // ];
     return Scaffold(
-      backgroundColor: Color(0xffea1f62),
+      backgroundColor: Color(0xfff53679),
       appBar: AppBar(
-        backgroundColor: Color(0xffea1f62),
+        backgroundColor: Color(0xfff53679),
         elevation: 0,
         title: const Text("Predicted diseases"),
       ),
@@ -47,9 +47,10 @@ class PredictedDiseasesScreen extends StatelessWidget {
                       children: [
                         Text(
                           disease['name'],
-                          style: TextStyle(fontSize: 21,fontWeight: FontWeight.w700),
+                          style: TextStyle(fontSize: 21,fontWeight: FontWeight.w700,color: Colors.white),
                         ),
                         CircularPercentIndicator(
+                          progressColor: Colors.white,
                           radius: 30,
                           percent: disease['percent'] / 100,
                           center:
@@ -62,7 +63,6 @@ class PredictedDiseasesScreen extends StatelessWidget {
                     children: [
                       ContainerButton(
                         onPressed: () async{
-                          var auth = FirebaseAuth.instance.currentUser;
                           var response=await FirebaseFirestore.instance.collection('diseases').doc(disease['name']).get();
                           var url=response['KnowMoreUrl'];
                           Navigator.push(

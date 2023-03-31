@@ -45,18 +45,17 @@ class SignInPage extends StatelessWidget {
                 "dp3": 0,
                 "joinedGroups": []
               });
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => OptionScreen()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>OptionScreen()));
             }
             else if (data!['disease1'] != "") {
               var response = {
                 "disease": [
                   {'name': data['disease1'], 'percent': data['dp1']},
                   {'name': data['disease2'], 'percent': data['dp2']},
-                  {'name': data['disease1'], 'percent': data['dp1']}
+                  {'name': data['disease3'], 'percent': data['dp3']}
                 ]
               };
-              Navigator.pushNamed(context, PredictedDiseasesScreen.routeName,
+              Navigator.pushReplacementNamed(context, PredictedDiseasesScreen.routeName,
                   arguments: response);
             }
           }
@@ -71,7 +70,7 @@ class SignInPage extends StatelessWidget {
               "dp3":0,
               "joinedGroups": []
             });
-            Navigator.of(context).push(MaterialPageRoute(builder: (_)=> OptionScreen()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> OptionScreen()));
           }
         }),
       ],

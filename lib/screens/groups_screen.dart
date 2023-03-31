@@ -14,7 +14,7 @@ class GroupsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Suggested Communities"),
-        backgroundColor: Colors.pink,
+        backgroundColor: Color(0xfff53679),
         centerTitle: true,
       ),
       body: FutureBuilder<QuerySnapshot>(

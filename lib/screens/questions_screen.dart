@@ -21,7 +21,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     final questionsList = Provider.of<Symptoms>(context).questionsList;
 
     return Scaffold(
-      backgroundColor: Color(0xffea1f62),
+      backgroundColor: Color(0xfff53679),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -151,7 +151,7 @@ class _QuestionBodyState extends State<QuestionBody> {
             widget.question.questionText,
             textAlign: TextAlign.center,
             style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w500, fontSize: 16.5),
+                fontWeight: FontWeight.w500, fontSize: 16.5,color: Colors.white),
           )),
         ),
         Expanded(
