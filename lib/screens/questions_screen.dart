@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:safe_connect/models/questions.dart';
 import 'package:safe_connect/screens/predicted_diseases_screen.dart';
@@ -50,21 +51,23 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                       SnackBar(
                         backgroundColor: Colors.grey.shade200.withOpacity(0.5),
                         content: BackdropFilter(
-                            filter:
-                                ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                            child: Container(
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Center(
-                                    child: Text(
-                                  "Select the option",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                )))),
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Select the option",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
                         duration: const Duration(seconds: 1),
                         behavior: SnackBarBehavior.floating,
                         padding: const EdgeInsets.all(10),
@@ -79,14 +82,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Center(
                       child: Text(
                         widget.index == 22 ? "Submit" : "Next question",
-                        style: TextStyle(
-                            color: Color(0xff6b5ae3),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
+                        style: GoogleFonts.acme(color: Color(0xff6b5ae3),fontSize: 20,fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
@@ -127,17 +127,18 @@ class _QuestionBodyState extends State<QuestionBody> {
           flex: 1,
           child: Center(
               child: Text(
-            "${widget.questionNumber + 1}. " + widget.question.questionText,
+            widget.question.questionText,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18, color: Colors.white),
+            style:
+                GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 16.5),
           )),
         ),
         Expanded(
           flex: 3,
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 14),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: Colors.white),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+            color: Colors.white.withOpacity(0.1)),
             child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ListView(
@@ -152,14 +153,13 @@ class _QuestionBodyState extends State<QuestionBody> {
                         margin: const EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
                             color: widget.question.answer == option['value']
-                                ? Color(0xffd9cc03)
-                                : Color(0xffeeeffc),
+                                ? Color(0xffeeeffc)
+                                : Color(0xffeeeffc).withOpacity(0.4),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
-                                color:
-                                    widget.question.answer == option['value']
-                                        ? const Color(0xff7cd8bb)
-                                        : const Color(0xffd8dce6),
+                                color: widget.question.answer == option['value']
+                                    ? const Color(0xff7cd8bb)
+                                    : const Color(0xffd8dce6),
                                 width: 2)),
                         child: Center(
                           child: Padding(
@@ -167,13 +167,11 @@ class _QuestionBodyState extends State<QuestionBody> {
                             child: Text(
                               option['option'],
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: widget.question.answer ==
-                                          option['value']
-                                      ? Colors.white
-                                      : Color(0xff3b8bf0),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                              style: GoogleFonts.poppins(
+                                  color:widget.question.answer == option['value']
+                                      ? Color(0xff6b5ae3)
+                                      : Color(0xffeeeffc),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),

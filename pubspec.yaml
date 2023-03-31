@@ -46,6 +46,7 @@ dependencies:
   flutter_chat_ui: ^1.6.6
   flutterfire_ui: ^0.4.3+20
   firebase_auth: ^4.4.0
+  google_fonts: ^4.0.3
   file_picker: ^5.2.6
   image_picker: ^0.8.7+1
   mime: ^1.0.4
