@@ -9,8 +9,9 @@ class PredictedDiseasesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String,dynamic> data=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
-    List<dynamic> diseases=data['disease'];
+    Map<String, dynamic> data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    List<dynamic> diseases = data['disease'];
 
     // List<dynamic> diseases = [
     //   {"name": "Gonorrhea", "percent": 62.34},
@@ -18,72 +19,82 @@ class PredictedDiseasesScreen extends StatelessWidget {
     //   {"name": "Syphllis", "percent": 10.62}
     // ];
     return Scaffold(
+      backgroundColor: Color(0xffea1f62),
       appBar: AppBar(
-        title: const Text("Sam"),
+        backgroundColor: Color(0xffea1f62),
+        elevation: 0,
+        title: const Text("Predicted diseases"),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Center(child: Text("Diseases")),
-          Column(
-            children: diseases.map((disease) {
-              return Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            disease['name'],
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          CircularPercentIndicator(
-                            radius: 30,
-                            percent: disease['percent'] / 100,
-                            center: Text(
-                                disease['percent'].toInt().toString() + "%"),
-                          ),
-                        ],
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: diseases.map((disease) {
+          return Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        disease['name'],
+                        style: TextStyle(fontSize: 18),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        ContainerButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewScreen(),));
-                          },
-                          text: "Know More",
-                          backgroundColor: Colors.grey,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10)),
-                        ),
-                        ContainerButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>GroupsScreen(diseaseName: disease['name'])));
-                          },
-                          text: "Community",
-                          backgroundColor: Colors.green,
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(10)),
-                        ),
-
-                      ],
-                    )
-                  ],
+                      CircularPercentIndicator(
+                        radius: 30,
+                        percent: disease['percent'] / 100,
+                        center:
+                            Text(disease['percent'].toInt().toString() + "%"),
+                      ),
+                    ],
+                  ),
                 ),
-              );
-            }).toList(),
-          ),
-        ],
+                Row(
+                  children: [
+                    ContainerButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WebViewScreen(),
+                          ),
+                        );
+                      },
+                      text: "Know More",
+                      backgroundColor: Color(0xffFFEAEA),
+                      borderRadius:
+                          BorderRadius.only(bottomLeft: Radius.circular(10)),
+                    ),
+                    Container(
+                      width: 2,
+                    ),
+                    ContainerButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                GroupsScreen(diseaseName: disease['name']),
+                          ),
+                        );
+                      },
+                      text: "Community",
+                      backgroundColor: Color(0xffFFEAEA),
+                      borderRadius:
+                          BorderRadius.only(bottomRight: Radius.circular(10)),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        }).toList(),
       ),
     );
   }
@@ -114,7 +125,14 @@ class ContainerButton extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Center(child: Text(text,style: TextStyle(fontSize: 16),)),
+            child: Center(
+                child: Text(
+              text,
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xffea1f62),
+                  fontWeight: FontWeight.w500),
+            )),
           ),
         ),
       ),
