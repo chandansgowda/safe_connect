@@ -11,9 +11,11 @@ import 'package:uuid/uuid.dart';
 
 
 class ChatScreen extends StatefulWidget {
+  final String groupId;
   final String groupName;
+  final String diseaseName;
 
-  ChatScreen(this.groupName);
+  ChatScreen(this.groupId, this.groupName, this.diseaseName);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -37,9 +39,9 @@ class _ChatScreenState extends State<ChatScreen> {
           title: Text(widget.groupName),
         ),
         body: StreamBuilder(
-            stream: db.collection('diseases').doc('AIDS').collection('groups')
+            stream: db.collection('diseases').doc(widget.diseaseName).collection('groups')
                 .doc(
-                '4x738Rb3bzzIWui7KYqB').collection('messages')
+                widget.groupId).collection('messages')
                 .snapshots(),
             builder: (context, snapshot) {
               List<DocumentSnapshot> messageDocs;

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safe_connect/screens/chat_screen.dart';
+import 'package:safe_connect/screens/groups_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ChatScreen("Room Name")));
+          Navigator.of(context).push(MaterialPageRoute(builder: (_)=> GroupsScreen(diseaseName: "AIDS")));
       }, child: Icon(Icons.message),),
     );
   }
