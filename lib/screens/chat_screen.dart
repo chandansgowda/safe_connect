@@ -42,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
         body: StreamBuilder(
             stream: db.collection('diseases').doc(widget.diseaseName).collection('groups')
                 .doc(
-                widget.groupId).collection('messages')
+                widget.groupId).collection('messages').orderBy("createdAt", descending: true)
                 .snapshots(),
             builder: (context, snapshot) {
               List<DocumentSnapshot> messageDocs;
@@ -67,7 +67,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     text: mDoc["text"],
                   ));
                 });
-                print(messageDocs);
                 return Chat(
                   theme: DefaultChatTheme(primaryColor: Color(0xfff53679)),
                   messages: messages,

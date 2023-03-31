@@ -13,7 +13,7 @@ class Symptoms with ChangeNotifier {
   List<Question> questionsList = [
     Question(
         questionText:
-            "Have you noticed any changes in your ability to perform daily activities that require muscle strength, such as lifting, carrying or climbing stairs?",
+            "Have you noticed any changes in your ability to perform daily activities that require muscle strength?",
         options: [
           {
             "option": "No changes in ability to perform daily activities",
