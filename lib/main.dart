@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         home: AuthGate(),
-        theme: ThemeData.dark().copyWith(
+        theme: ThemeData.light().copyWith(
           inputDecorationTheme: InputDecorationTheme(
             labelStyle: TextStyle(color: Colors.pink),
             border: OutlineInputBorder(
