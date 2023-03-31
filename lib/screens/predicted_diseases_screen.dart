@@ -54,7 +54,7 @@ class PredictedDiseasesScreen extends StatelessWidget {
                           radius: 30,
                           percent: disease['percent'] / 100,
                           center:
-                              Text(disease['percent'].toInt().toString() + "%"),
+                              Text(disease['percent'].toInt().toString() + "%",style: TextStyle(color: Colors.white),),
                         ),
                       ],
                     ),
