@@ -26,7 +26,7 @@ class OptionScreen extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            ContainerButton(text: "Select Disease", onPressed: (){
+            ContainerButton(text: "Self Certify", onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>DiseasesOptionsScreen()));
             }),
           ],

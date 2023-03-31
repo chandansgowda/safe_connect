@@ -45,6 +45,7 @@ dependencies:
   webview_flutter: ^4.0.7
   flutterfire_ui: ^0.4.3+20
   firebase_auth: ^4.4.0
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:
