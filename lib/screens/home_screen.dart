@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safe_connect/screens/chat_screen.dart';
+import 'package:safe_connect/screens/signin_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(onPressed: () async{
             await FirebaseAuth.instance.signOut();
-            Navigator.of(context).pop();
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInPage()));
           }, icon: Icon(Icons.exit_to_app_outlined))
         ],
       ),

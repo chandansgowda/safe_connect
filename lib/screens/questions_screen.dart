@@ -10,6 +10,7 @@ import 'package:safe_connect/services.dart';
 class QuestionsScreen extends StatefulWidget {
   static const routeName = '/questions-screen';
   int index = 0;
+  bool isLoading=false;
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
@@ -37,6 +38,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   if (questionsList[widget.index].answer != -1) {
                     if (widget.index == 22) {
                       Services.getDiseases(questionsList).then((response) {
+                        Services.updateDiseases(
+                            d1: response['disease'][0]['name'],
+                            dp1: response['disease'][0]['percent'],
+                            d2: response['disease'][1]['name'],
+                            dp2: response['disease'][1]['percent'],
+                            d3: response['disease'][2]['name'],
+                            dp3: response['disease'][2]['percent']);
                         Navigator.pushNamed(
                             context, PredictedDiseasesScreen.routeName,
                             arguments: response);
@@ -84,9 +92,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Center(
-                      child: Text(
+                      child: widget.isLoading?Center(child: CircularProgressIndicator(),):Text(
                         widget.index == 22 ? "Submit" : "Next question",
-                        style: GoogleFonts.acme(color: Color(0xff6b5ae3),fontSize: 20,fontWeight: FontWeight.w500),
+                        style: GoogleFonts.acme(
+                            color: Color(0xff6b5ae3),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
@@ -129,16 +140,17 @@ class _QuestionBodyState extends State<QuestionBody> {
               child: Text(
             widget.question.questionText,
             textAlign: TextAlign.center,
-            style:
-                GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 16.5),
+            style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w500, fontSize: 16.5),
           )),
         ),
         Expanded(
           flex: 3,
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 14),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-            color: Colors.white.withOpacity(0.1)),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white.withOpacity(0.1)),
             child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ListView(
@@ -168,9 +180,10 @@ class _QuestionBodyState extends State<QuestionBody> {
                               option['option'],
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poppins(
-                                  color:widget.question.answer == option['value']
-                                      ? Color(0xff6b5ae3)
-                                      : Color(0xffeeeffc),
+                                  color:
+                                      widget.question.answer == option['value']
+                                          ? Color(0xff6b5ae3)
+                                          : Color(0xffeeeffc),
                                   fontWeight: FontWeight.w500),
                             ),
                           ),

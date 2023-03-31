@@ -11,6 +11,7 @@ class PredictedDiseasesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String,dynamic> data=ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
     List<dynamic> diseases=data['disease'];
+
     // List<dynamic> diseases = [
     //   {"name": "Gonorrhea", "percent": 62.34},
     //   {"name": "AIDS", "percent": 13.34},

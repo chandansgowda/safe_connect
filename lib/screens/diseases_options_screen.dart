@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safe_connect/screens/groups_screen.dart';
+import 'package:safe_connect/services.dart';
 
 class DiseasesOptionsScreen extends StatelessWidget {
   static const routeName='/diseases-options-screen';
@@ -29,7 +30,7 @@ class DiseasesOptionsScreen extends StatelessWidget {
             .map(
               (disease) => GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>GroupsScreen(diseaseName: disease)));
+                  Services.changeSelfCertifyVal(disease: disease).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=>GroupsScreen(diseaseName: disease))));
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 5),
