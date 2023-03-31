@@ -33,41 +33,46 @@ class SignInPage extends StatelessWidget {
           Map<String, dynamic>? data;
           if(userData.exists) {
             data = userData.data();
-            if (data!['disease1'] != null) {
-              var response = {
-                "disease": [
-                  {'name': data!['disease1'], 'percent': data!['dp1']},
-                  {'name': data!['disease2'], 'percent': data!['dp2']},
-                  {'name': data!['disease1'], 'percent': data!['dp1']}
-                ]
-              };
-              Navigator.pushNamed(context, PredictedDiseasesScreen.routeName,
-                  arguments: response);
-            }
-            else {
+            if(data!.isEmpty){
               await FirebaseFirestore.instance.collection("users").doc(
                   signedIn.user!.email).set({
                 "isDiseaseKnown": false,
                 "disease1": "",
                 "disease2": "",
                 "disease3": "",
+                "dp1":0,
+                "dp2":0,
+                "dp3":0,
                 "joinedGroups": []
               });
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>OptionScreen()));
             }
-          }
+            else if (data!['disease1']!="") {
+              var response = {
+                "disease": [
+                  {'name': data['disease1'], 'percent': data['dp1']},
+                  {'name': data['disease2'], 'percent': data['dp2']},
+                  {'name': data['disease1'], 'percent': data['dp1']}
+                ]
+              };
+              Navigator.pushNamed(context, PredictedDiseasesScreen.routeName,
+                  arguments: response);
+            }
           else{
             await FirebaseFirestore.instance.collection("users").doc(signedIn.user!.email).set({
               "isDiseaseKnown":false,
               "disease1": "",
               "disease2": "",
               "disease3": "",
+              "dp1":0,
+              "dp2":0,
+              "dp3":0,
               "joinedGroups": []
             });
             //TODO: Send him to select option (quiz/self certify) screen
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> OptionScreen()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (_)=> OptionScreen()));
           }
-
-        }),
+        }}),
       ],
     );
   }
