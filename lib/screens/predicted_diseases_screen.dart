@@ -69,7 +69,7 @@ class PredictedDiseasesScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>GroupsScreen(diseaseName: disease['name'])));
                           },
-                          text: "Join community",
+                          text: "Community",
                           backgroundColor: Colors.green,
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(10)),
