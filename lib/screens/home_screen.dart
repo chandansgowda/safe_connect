@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ChatScreen()));
+          //Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ChatScreen()));
       }, child: Icon(Icons.message),),
     );
   }

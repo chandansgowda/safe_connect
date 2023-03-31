@@ -10,7 +10,7 @@ import 'package:safe_connect/services.dart';
 class QuestionsScreen extends StatefulWidget {
   static const routeName = '/questions-screen';
   int index = 0;
-  bool isLoading=false;
+  bool isLoading = false;
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
@@ -21,7 +21,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     final questionsList = Provider.of<Symptoms>(context).questionsList;
 
     return Scaffold(
-      backgroundColor: Color(0xff6b5ae3),
+      backgroundColor: Color(0xffea1f62),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -37,7 +37,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 onTap: () async {
                   if (questionsList[widget.index].answer != -1) {
                     if (widget.index == 22) {
+                      setState(() {
+                        widget.isLoading=true;
+                      });
                       Services.getDiseases(questionsList).then((response) {
+                        setState(() {
+                          widget.isLoading=false;
+                        });
                         Services.updateDiseases(
                             d1: response['disease'][0]['name'],
                             dp1: response['disease'][0]['percent'],
@@ -86,19 +92,23 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Color(0xffFFEAEA),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Center(
-                      child: widget.isLoading?Center(child: CircularProgressIndicator(),):Text(
-                        widget.index == 22 ? "Submit" : "Next question",
-                        style: GoogleFonts.acme(
-                            color: Color(0xff6b5ae3),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500),
-                      ),
+                      child: widget.isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Text(
+                              widget.index == 22 ? "Submit" : "Next question",
+                              style: GoogleFonts.acme(
+                                  color:Color(0xffea1f62),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500),
+                            ),
                     ),
                   ),
                 ),
@@ -164,15 +174,19 @@ class _QuestionBodyState extends State<QuestionBody> {
                       child: Container(
                         margin: const EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
+                          color: widget.question.answer == option['value']
+                              ? Color(0xffeeeffc).withOpacity(0.5)
+                              : Color(0xffeeeffc).withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            width: widget.question.answer == option['value']
+                                ? 1
+                                : 2,
                             color: widget.question.answer == option['value']
-                                ? Color(0xffeeeffc)
-                                : Color(0xffeeeffc).withOpacity(0.4),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                                color: widget.question.answer == option['value']
-                                    ? const Color(0xff7cd8bb)
-                                    : const Color(0xffd8dce6),
-                                width: 2)),
+                                ? Colors.white
+                                : const Color(0xffd8dce6),
+                          ),
+                        ),
                         child: Center(
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -182,7 +196,7 @@ class _QuestionBodyState extends State<QuestionBody> {
                               style: GoogleFonts.poppins(
                                   color:
                                       widget.question.answer == option['value']
-                                          ? Color(0xff6b5ae3)
+                                          ? Colors.white
                                           : Color(0xffeeeffc),
                                   fontWeight: FontWeight.w500),
                             ),
@@ -198,36 +212,3 @@ class _QuestionBodyState extends State<QuestionBody> {
     );
   }
 }
-
-// options
-//     .map((option) => GestureDetector(
-// onTap: () {
-// setState(() {
-// widget.question.answer = option[1];
-// });
-// },
-// child: Container(
-// margin: const EdgeInsets.symmetric(vertical: 5),
-// decoration: BoxDecoration(
-// color: widget.question.answer == option[1]
-// ? const Color(0xffb1e9d6)
-//     : const Color(0xfff0f0f0),
-// borderRadius: BorderRadius.circular(20),
-// border: Border.all(
-// color: widget.question.answer == option[1]
-// ? const Color(0xff7cd8bb)
-//     : const Color(0xfff0f0f0),
-// width: 2)),
-// child: Center(
-// child: Padding(
-// padding: const EdgeInsets.all(12.0),
-// child: Text(
-// option[0],
-// style: const TextStyle(
-// fontSize: 16, fontWeight: FontWeight.w600),
-// ),
-// ),
-// ),
-// ),
-// ))
-//     .toList(),

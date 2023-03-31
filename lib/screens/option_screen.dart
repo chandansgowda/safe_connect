@@ -9,7 +9,7 @@ class OptionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("title"),
+        title: Text("Select Options"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
@@ -49,7 +49,7 @@ class ContainerButton extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Color(0xffea1f62),
           borderRadius: BorderRadius.circular(25),
         ),
         child: Padding(
