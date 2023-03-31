@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:safe_connect/screens/chat_screen.dart';
 import 'package:safe_connect/screens/home_screen.dart';
 
 class GroupsScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class GroupsScreen extends StatelessWidget {
         future:
             db.collection('diseases').doc(diseaseName).collection('groups').get(),
         builder: (ctx, snapshot) {
-          final List groups = snapshot.data!.docs;
+          final List<DocumentSnapshot> groups = snapshot.data!.docs;
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(
@@ -51,7 +52,7 @@ class GroupsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (ctx) => HomeScreen()));
+                                  builder: (ctx) => ChatScreen(group.id,group['name'], diseaseName)));
                         },
                         child: Text(
                           "Join Group",
